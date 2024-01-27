@@ -40,3 +40,4 @@ dumpFormData = () => {
     // Alternatively, you can display the form data in an alert or update the HTML content
     // Example: alert("Form data:\n" + JSON.stringify(formData, null, 2));
 }
+
