@@ -37,3 +37,4 @@ df_listings = pd.json_normalize(listing_response.json()["data"]["cat1"]["searchR
 print("Number of rows:", len(df_listings))
 print("Number of columns:", len(df_listings.columns))
 print(df_listings)
+print(listing_response.json()["data"])
