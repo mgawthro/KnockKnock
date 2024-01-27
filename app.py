@@ -1,10 +1,18 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response, url_for
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+    return render_template('main.html')
+
+@app.route('/potential')
+def potential():
     return render_template('potential.html')
+
+@app.route('/current')
+def current():
+    return render_template('current.html')
 
 @app.route('/api/store_data', methods=['POST'])
 def store_data():
