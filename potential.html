@@ -86,6 +86,9 @@
                 } else {
                     map.setView([address.lat, address.lon], 15);
                 }
+                //going to have leasing info
+                var popupContent = "<div>Resigning</div>";
+                marker.bindPopup(popupContent);
             },
         });
         map.addControl(addressSearchControl);
