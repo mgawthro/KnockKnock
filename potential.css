@@ -1,0 +1,77 @@
+#map {
+    height: 400px;
+    width: 500px;
+    padding-top: 10px;
+    transform: translate(0%, 13%);
+
+}
+.theme1 {
+    font-family: 'Montserrat', sans-serif;
+    --text-color: rgb(255, 255, 255);
+    --background-color: rgb(92, 145, 203);
+    --accent-color: #ffbb00;
+    --accent-color1:#100653;
+    --accent-text: whitesmoke;
+}
+input[type="text"], [type="button"]{
+    font-size: 15px;
+    font-weight:300; line-height:22px; 
+    color:var(--acent3);
+    border-radius: 9px;
+    border:none;
+    letter-spacing: 1px;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--accent3);
+}
+h1 {
+    font-size: 34px;
+    font-weight: 350;
+    font-style: italic;
+    color: var(--accent-color);
+    /* background-color: var(--accent-color); */
+    padding: 10px;
+    border-radius: 8px;
+    margin: 15px;
+}
+h2 {
+    font-size: 24px;
+    font-weight: 350;
+    font-style: italic;
+    color: var(--accent-color1);
+    /* background-color: var(--accent-color); */
+    padding: 10px;
+    border-radius: 8px;
+    margin: 15px;
+}
+.pagename{
+    transform:translate(100%, 100%);
+}
+.popup{
+    width: 100%;
+    height: 100%;
+    border-radius: 9px;
+    background-color:var(--background-color);
+}
+#title-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+
+#out-map {
+    margin-top: 50px; /* Adjust as needed */
+}
+
+#map {
+    height: 400px;
+    width: 500px;
+    margin: 10px;
+    /* Adjust map size as needed */
+}
