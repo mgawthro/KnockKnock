@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<title>Property Search with ATTOM API</title>
+<title>Property Search </title>
 
+<head>
 <!-- Include Leaflet CSS and JS -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+<link rel="stylesheet" href="https://unpkg.com/@geoapify/leaflet-address-search-plugin@^1/dist/L.Control.GeoapifyAddressSearch.min.css" />
+<script src="https://unpkg.com/@geoapify/leaflet-address-search-plugin@^1/dist/L.Control.GeoapifyAddressSearch.min.js"></script>
+</head>
+
 <style>
     #map {
         height: 400px;
-        width: 400px;
+        width: 500px;
         padding-top: 10px;
 
     }
@@ -42,52 +47,7 @@
             margin: 0;
             background-color: var(--accent3);
         }
-
-        .search-container {
-            position: relative;
-            width: 300px;
-        }
-
-        .search-input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            transition: box-shadow 0.3s ease;
-        }
-        .search-input:focus {
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-        .search-icon {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            color: #888;
-        }
-        .autocomplete-item {
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .autocomplete-container {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            max-height: 200px;
-            overflow-y: auto;
-            border: 1px solid #ccc;
-            border-top: none;
-            border-radius: 0 0 5px 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            display: none;
-        }
-        .autocomplete-item:hover {
-            background-color: #eee;
-        }
+        
 </style>
 <head>
     <meta charset="UTF-8">
@@ -97,102 +57,44 @@
 </head>
 <body>
 
-    <div id="search-cont"> 
-        <!-- search cont -->
-
-        <div class="search-container">
-        <input type="text" class="search-input" placeholder="find listings...">
-        <button class="search-icon">🔍</button>
-        <button onclick="search()">Search</button>
-    </div> 
-
-    <div class="search-container">
-        <input type="text" class="search-input" id="propertySearch" placeholder="Search...">
-        <div class="autocomplete-container" id="autocompleteContainer"></div>
-    </div>
-
-    <div>
-        <!-- map cont -->
-    </div>
-
+    <!-- map cont -->
     <div id="map"></div>
 
     <script>
-        //need to change to a database w listing or use a API
-        const searchInput = document.getElementById('propertySearch');
-        const autocompleteContainer = document.getElementById('autocompleteContainer');
-
-        // Event listener for input changes
-        searchInput.addEventListener('input', function() {
-            const searchTerm = searchInput.value.toLowerCase();
-
-            // Replace 'YOUR_ATTOM_API_KEY' with your actual ATTOM API key
-            const apiKey = 'YOUR_ATTOM_API_KEY';
-            const apiUrl = `https://search.onboard-apis.com/propertyapi/v1.0.0/property/suggest?search=${searchTerm}`;
-
-            // Make a request to the ATTOM API
-            fetch(apiUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Api-Key': d57b98af72bb1a0ff74d551381776be9
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Extract property listings from the API response and update autocomplete
-                const propertyListings = data.suggestions.map(suggestion => suggestion.propertyname);
-                updateAutocomplete(propertyListings);
-            })
-            .catch(error => {
-                console.error('Error fetching data from ATTOM API:', error);
-            });
-        });
-
-        // Function to update autocomplete suggestions
-        function updateAutocomplete(listings) {
-            autocompleteContainer.innerHTML = '';
-
-            if (listings.length > 0) {
-                listings.forEach(listing => {
-                    const item = document.createElement('div');
-                    item.classList.add('autocomplete-item');
-                    item.textContent = listing;
-                    item.addEventListener('click', function() {
-                        searchInput.value = listing;
-                        autocompleteContainer.style.display = 'none';
-                    });
-                    autocompleteContainer.appendChild(item);
-                });
-
-                autocompleteContainer.style.display = 'block';
-            } else {
-                autocompleteContainer.style.display = 'none';
-            }
-        }
-
-        // Event listener to close autocomplete on document click
-        document.addEventListener('click', function(event) {
-            if (!autocompleteContainer.contains(event.target)) {
-                autocompleteContainer.style.display = 'none';
-            }
-        });
-        
-
-        var map = L.map('map').setView([42.2808, -83.7430], 13); // Coordinates for Ann Arbor, Michigan
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
+        var map = L.map('map').setView([42.2808, -83.7430], 14);
+        var myAPIkey = "36fc6ce18849487b8fdad29829ac9555";
+        var mapURL = `https://maps.geoapify.com/v1/tile/klokantech-basic/{z}/{x}/{y}.png?apiKey=${myAPIkey}`;
+    
+        L.tileLayer(mapURL, {
+            attribution: 'Powered by Geoapify | © OpenMapTiles © OpenStreetMap contributors',
+            apiKey: myAPIkey,
+            mapStyle: "klokantech-basic",
         }).addTo(map);
-
-        // L.marker([42.2808, -83.7430]).addTo(map)
-        //     .bindPopup('Ann Arbor, Michigan');
-
-        function search() {
-            // somehow connect to property data base
-            console.log('Search button clicked!');
-        }
+    
+        var marker;
+    
+        const addressSearchControl = L.control.addressSearch(myAPIkey, {
+            position: 'topright',
+            resultCallback: (address) => {
+                if (marker) {
+                    marker.remove();
+                }
+                if (!address) return;
+                marker = L.marker([address.lat, address.lon]).addTo(map);
+                if (address.bbox && address.bbox.lat1 !== address.bbox.lat2 && address.bbox.lon1 !== address.bbox.lon2) {
+                    map.fitBounds([[address.bbox.lat1, address.bbox.lon1], [address.bbox.lat2, address.bbox.lon2]], { padding: [100, 100] });
+                } else {
+                    map.setView([address.lat, address.lon], 15);
+                }
+                //going to have leasing info
+                var popupContent = "<div>Resigning</div>";
+                marker.bindPopup(popupContent);
+            },
+        });
+        map.addControl(addressSearchControl);
     </script>
+    
+    
     
 </body>
 </html>
