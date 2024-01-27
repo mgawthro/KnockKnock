@@ -1,0 +1,129 @@
+{
+    "rawHomeStatusCd": "ForRent",
+    "marketingStatusSimplifiedCd": "For Rent",
+    "zpid": "241598801",
+    "id": "241598801",
+    "providerListingId": "282zekzma9q7t",
+    "imgSrc": "https://photos.zillowstatic.com/fp/fa6b011d5b108f020f6ea3482af50c3a-p_e.jpg",
+    "hasImage": true,
+    "carouselPhotos": [
+      {
+        "url": "https://photos.zillowstatic.com/fp/fa6b011d5b108f020f6ea3482af50c3a-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/6765c6e595bb72426a55e7e4f0e0cbdc-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/dd8ce6f91be1600c112a6d19813994c9-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/f9cd1c19a3da7adc6c482b615be26d2e-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/6892010290fbf793d4b607741cf40272-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/49a3a43c187e74062245dd7b8375eee4-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/1e873b47837055708a2ef1f83662533c-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/5f8b59113b71a43c2e5758fbe69edd01-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/c20fff7f282a1410e473f986819de16c-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/3ea77df0441d445bc3411def341d91b6-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/77109d3cc6c4209e240e08801da1108f-p_e.jpg"
+      },
+      {
+        "url": "https://photos.zillowstatic.com/fp/5534ece836b7fa2ddd202934e9378a7d-p_e.jpg"
+      }
+    ],
+    "detailUrl": "https://www.zillow.com/homedetails/5531-Arbor-Chase-Dr-Ann-Arbor-MI-48103/241598801_zpid/",
+    "statusType": "FOR_RENT",
+    "statusText": "House for rent",
+    "countryCurrency": "$",
+    "price": "$2,250/mo",
+    "unformattedPrice": 2250,
+    "address": "5531 Arbor Chase Dr, Ann Arbor, MI 48103",
+    "addressStreet": "5531 Arbor Chase Dr",
+    "addressCity": "Ann Arbor",
+    "addressState": "MI",
+    "addressZipcode": "48103",
+    "isUndisclosedAddress": false,
+    "beds": 2,
+    "baths": 2.5,
+    "area": 1520,
+    "latLong": {
+      "latitude": 42.28453,
+      "longitude": -83.84124
+    },
+    "isZillowOwned": false,
+    "variableData": {
+      "type": "TIME_ON_INFO",
+      "text": "5 days ago",
+      "data": {
+        "isFresh": false
+      }
+    },
+    "badgeInfo": null,
+    "hdpData": {
+      "homeInfo": {
+        "zpid": 241598801,
+        "streetAddress": "5531 Arbor Chase Dr",
+        "zipcode": "48103",
+        "city": "Ann Arbor",
+        "state": "MI",
+        "latitude": 42.28453,
+        "longitude": -83.84124,
+        "price": 2250.0,
+        "bathrooms": 2.5,
+        "bedrooms": 2.0,
+        "livingArea": 1520.0,
+        "homeType": "SINGLE_FAMILY",
+        "homeStatus": "FOR_RENT",
+        "daysOnZillow": -1,
+        "isFeatured": true,
+        "shouldHighlight": false,
+        "isRentalWithBasePrice": false,
+        "zestimate": 368300,
+        "rentZestimate": 2199,
+        "listing_sub_type": {},
+        "isUnmappable": false,
+        "isPreforeclosureAuction": false,
+        "homeStatusForHDP": "FOR_RENT",
+        "priceForHDP": 2250.0,
+        "isNonOwnerOccupied": true,
+        "isPremierBuilder": false,
+        "isZillowOwned": false,
+        "currency": "USD",
+        "country": "USA",
+        "taxAssessedValue": 323400.0,
+        "isShowcaseListing": false
+      }
+    },
+    "isSaved": false,
+    "isUserClaimingOwner": false,
+    "isUserConfirmedClaim": false,
+    "pgapt": "ForRent",
+    "sgapt": "For Rent",
+    "zestimate": 368300,
+    "shouldShowZestimateAsPrice": false,
+    "has3DModel": false,
+    "hasVideo": false,
+    "isHomeRec": false,
+    "hasAdditionalAttributions": false,
+    "isFeaturedListing": true,
+    "isShowcaseListing": false,
+    "availabilityDate": "2024-03-07 00:00:00",
+    "rentalMarketingSubType": "unknown",
+    "isR4R": false,
+    "rooms": null,
+    "list": true,
+    "relaxed": false
+  }
