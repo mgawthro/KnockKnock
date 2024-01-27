@@ -1,0 +1,96 @@
+/* Modern theme */
+.theme1 {
+    font-family: 'Montserrat', sans-serif;
+    --text-color: rgb(255, 255, 255);
+    --background-color: rgb(92, 145, 203);
+    --accent-color: #ffbb00;
+    --accent-text: whitesmoke;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    overflow: auto;
+}
+
+form {
+    max-width: 400px;
+    padding: 20px;
+    align-items: center;
+    /* background-color: rgba(255, 255, 255, 0.9); */
+    /* border-radius: 10px; */
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 350;
+    font-style: italic;
+    color: var(--accent-color);
+    /* background-color: var(--accent-color); */
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+label[type="text"] {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    background-color: var(--accent-color);
+    color: var(--accent-text);
+    border-radius: 8px;
+    border: none;
+    letter-spacing: 1px;
+    padding: 10px;
+    padding-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+input[type="text"], [type="number"]{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+button [type="reset"] {
+    background-color: var(--accent-text);
+    color: var(--accent-text);
+    border: none;
+    border-radius: 8px;
+    padding-top: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: var(--accent-color);
+    color: var(--accent-text);
+    border: none;
+    border-radius: 8px;
+    padding-top: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: darken(var(--accent-color), 10%);
+}
