@@ -5,13 +5,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello, World!</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: row;
+        }
+        /* Style for the button */
+        a {
+            text-decoration: none; /* Remove underline from the link */
+        }
+
+        .button_to_current {
+        
+            padding: 20px; /* Adjust padding to make the button larger */
+            background-color: #3498db; /* Set background color */
+            color: #fff; /* Set text color */
+            border: none; /* Remove default button border */
+            border-radius: 0; /* Round the corners */
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            font-size: 48px; /* Adjust font size */
+            cursor: pointer; /* Change cursor on hover */
+            transition: background-color 0.3s; /* Add smooth transition for background color */
+            height: 100vh;
+            width: 50vw;
+            
+        }
+
+        /* Hover effect */
+        .button_to_current:hover {
+            background-color: #2980b9; /* Change background color on hover */
+        }
+        
+        .button_to_potential {
+            
+            padding: 20px; /* Adjust padding to make the button larger */
+            background-color: #3498db; /* Set background color */
+            color: #fff; /* Set text color */
+            border: none; /* Remove default button border */
+            border-radius: 0; /* Round the corners */
+            text-align: center;
+            justify-content: center;
+            display: flex;
+            align-items:center;
+            font-size: 48px; /* Adjust font size */
+            cursor: pointer; /* Change cursor on hover */
+            transition: background-color 0.3s; /* Add smooth transition for background color */
+            height: 100vh;
+            width: 50vw;
+            
+        }
+
+        /* Hover effect */
+        .button_to_potential:hover {
+            background-color: #2980b9; /* Change background color on hover */
+        }
+        a.button_to_current,
+        a.button_to_potential {
+            display: block;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
+    <a href="current.html">
+        <button class="button_to_current">Current Tenants</button>
+    </a>
 
-    <h1>Hello, World!</h1>
-
-    <p>This is a basic HTML file for a "Hello, World!" webpage.</p>
-    <p>Insert Ch here</p>
+    <a href="potential.html">
+        <button class="button_to_potential">Potential Tenants</button>
+    </a>
+    
     
 </body>
 </html>
