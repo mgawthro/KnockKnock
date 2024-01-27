@@ -6,42 +6,46 @@ import requests
 import warnings
 import json
 
-def get_listings(api_key, listing_url):
+def get_listings():
     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
 
     querystring = {
-        "api_key": api_key,
-        "url":listing_url
+        "api_key": "a83eaaf4-9c4f-40bc-8160-6eb101a6c58d",
+        "url":"https://www.zillow.com/ann-arbor-mi/rentals/?searchQueryState=%7B%22isMapVisible%22%3Atrue%2C%22mapBounds%22%3A%7B%22north%22%3A42.389183%2C%22south%22%3A42.183445%2C%22east%22%3A-83.605304%2C%22west%22%3A-83.954037%7D%2C%22filterState%22%3A%7B%22fr%22%3A%7B%22value%22%3Atrue%7D%2C%22fsba%22%3A%7B%22value%22%3Afalse%7D%2C%22fsbo%22%3A%7B%22value%22%3Afalse%7D%2C%22nc%22%3A%7B%22value%22%3Afalse%7D%2C%22cmsn%22%3A%7B%22value%22%3Afalse%7D%2C%22auc%22%3A%7B%22value%22%3Afalse%7D%2C%22fore%22%3A%7B%22value%22%3Afalse%7D%2C%22ah%22%3A%7B%22value%22%3Atrue%7D%2C%22apco%22%3A%7B%22value%22%3Afalse%7D%2C%22apa%22%3A%7B%22value%22%3Afalse%7D%2C%22con%22%3A%7B%22value%22%3Afalse%7D%7D%2C%22isListVisible%22%3Atrue%2C%22mapZoom%22%3A11%2C%22regionSelection%22%3A%5B%7B%22regionId%22%3A8097%2C%22regionType%22%3A6%7D%5D%2C%22pagination%22%3A%7B%7D%7D"
     }
 
-    return requests.request("GET", url, params=querystring)
+    requests.request("GET", url, params=querystring)
+    
+    return listing_response.json()["data"]
+    
+    
 
 
 
 
-api_key = "a83eaaf4-9c4f-40bc-8160-6eb101a6c58d"
+# api_key = "a83eaaf4-9c4f-40bc-8160-6eb101a6c58d"
 
-listing_url = "https://www.zillow.com/ann-arbor-mi/rentals/?searchQueryState=%7B%22isMapVisible%22%3Atrue%2C%22mapBounds%22%3A%7B%22north%22%3A42.389183%2C%22south%22%3A42.183445%2C%22east%22%3A-83.605304%2C%22west%22%3A-83.954037%7D%2C%22filterState%22%3A%7B%22fr%22%3A%7B%22value%22%3Atrue%7D%2C%22fsba%22%3A%7B%22value%22%3Afalse%7D%2C%22fsbo%22%3A%7B%22value%22%3Afalse%7D%2C%22nc%22%3A%7B%22value%22%3Afalse%7D%2C%22cmsn%22%3A%7B%22value%22%3Afalse%7D%2C%22auc%22%3A%7B%22value%22%3Afalse%7D%2C%22fore%22%3A%7B%22value%22%3Afalse%7D%2C%22ah%22%3A%7B%22value%22%3Atrue%7D%2C%22apco%22%3A%7B%22value%22%3Afalse%7D%2C%22apa%22%3A%7B%22value%22%3Afalse%7D%2C%22con%22%3A%7B%22value%22%3Afalse%7D%7D%2C%22isListVisible%22%3Atrue%2C%22mapZoom%22%3A11%2C%22regionSelection%22%3A%5B%7B%22regionId%22%3A8097%2C%22regionType%22%3A6%7D%5D%2C%22pagination%22%3A%7B%7D%7D"
+# listing_url = "https://www.zillow.com/ann-arbor-mi/rentals/?searchQueryState=%7B%22isMapVisible%22%3Atrue%2C%22mapBounds%22%3A%7B%22north%22%3A42.389183%2C%22south%22%3A42.183445%2C%22east%22%3A-83.605304%2C%22west%22%3A-83.954037%7D%2C%22filterState%22%3A%7B%22fr%22%3A%7B%22value%22%3Atrue%7D%2C%22fsba%22%3A%7B%22value%22%3Afalse%7D%2C%22fsbo%22%3A%7B%22value%22%3Afalse%7D%2C%22nc%22%3A%7B%22value%22%3Afalse%7D%2C%22cmsn%22%3A%7B%22value%22%3Afalse%7D%2C%22auc%22%3A%7B%22value%22%3Afalse%7D%2C%22fore%22%3A%7B%22value%22%3Afalse%7D%2C%22ah%22%3A%7B%22value%22%3Atrue%7D%2C%22apco%22%3A%7B%22value%22%3Afalse%7D%2C%22apa%22%3A%7B%22value%22%3Afalse%7D%2C%22con%22%3A%7B%22value%22%3Afalse%7D%7D%2C%22isListVisible%22%3Atrue%2C%22mapZoom%22%3A11%2C%22regionSelection%22%3A%5B%7B%22regionId%22%3A8097%2C%22regionType%22%3A6%7D%5D%2C%22pagination%22%3A%7B%7D%7D"
 
-# get listings
-listing_response = get_listings(api_key, listing_url)
+# # get listings
+# listing_response = get_listings(api_key, listing_url)
 
-listing_response.json().keys()
+# listing_response.json().keys()
 
-if not listing_response.json()["is_success"]:
-    print("Error Scraping")
+# if not listing_response.json()["is_success"]:
+#     print("Error Scraping")
 
-num_of_properties = listing_response.json()["data"]["categoryTotals"]["cat1"]["totalResultCount"]
-print("Count of properties:", num_of_properties)
+# num_of_properties = listing_response.json()["data"]["categoryTotals"]["cat1"]["totalResultCount"]
+# print("Count of properties:", num_of_properties)
 
-df_listings = pd.json_normalize(listing_response.json()["data"]["cat1"]["searchResults"]["mapResults"])
-print("Number of rows:", len(df_listings))
-print("Number of columns:", len(df_listings.columns))
-print(df_listings)
-print(listing_response.json()["data"])
+# df_listings = pd.json_normalize(listing_response.json()["data"]["cat1"]["searchResults"]["mapResults"])
+# print("Number of rows:", len(df_listings))
+# print("Number of columns:", len(df_listings.columns))
+# print(df_listings)
+# print(listing_response.json()["data"])
 
-file_path = "output.json"
+# file_path = "output.json"
 
-# Save the JSON object to the file
-with open(file_path, 'w') as json_file:
-    json.dump(listing_response.json()["data"], json_file, indent=2)  # 'indent' is optional for pretty formatting
+# # Save the JSON object to the file
+# with open(file_path, 'w') as json_file:
+#     json.dump(listing_response.json()["data"], json_file, indent=2)  # 'indent' is optional for pretty formatting
