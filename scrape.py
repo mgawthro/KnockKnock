@@ -4,6 +4,7 @@ import numpy as np
 import plotly.express as px
 import requests
 import warnings
+import json
 
 def get_listings(api_key, listing_url):
     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
@@ -38,3 +39,9 @@ print("Number of rows:", len(df_listings))
 print("Number of columns:", len(df_listings.columns))
 print(df_listings)
 print(listing_response.json()["data"])
+
+file_path = "output.json"
+
+# Save the JSON object to the file
+with open(file_path, 'w') as json_file:
+    json.dump(listing_response.json()["data"], json_file, indent=2)  # 'indent' is optional for pretty formatting
