@@ -20,6 +20,7 @@ input[type="text"], [type="button"]{
     border-radius: 9px;
     border:none;
     letter-spacing: 1px;
+    display: flex;
 }
 body {
     display: flex;
