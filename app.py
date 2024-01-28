@@ -39,35 +39,12 @@ def handle_form_submission():
 @app.route('/potential', methods=['POST'])
 def process_button():
     # Call your Python function here
-    result = your_python_function()
-    
-    f = open('output.json')
-    datum = json.load(f)
-    # Iterating through the json
-    listings = []
-    for data in datum["cat1"]["searchResults"]["mapResults"]:
-        if(data["statusType"] == "FOR_RENT"):
-            listings.append(Listing(address = data["address"], price = data["price"]))
-            if "beds" in data:
-                listings[-1].beds = data["beds"]
-            else:
-                listings[-1].beds  = data["minBeds"]
-            if "baths" in data:
-                listings[-1].bath = data["baths"]
-            else:
-                listings[-1].bath = data["minBaths"]
-            if "area" in data:
-                listings[-1].area = data["area"]
-            else:
-                listings[-1].area = data["minArea"]
-            print(listings[-1])
-    # Closing file
-    f.close()
+    result = fetch_json()
 
     # You can do something with the result, e.g., pass it to the template
     return render_template('potential.html', result=result)
 
-def getjson():
+def fetch_json():
     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
 
     querystring = {
