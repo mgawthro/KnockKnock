@@ -21,26 +21,56 @@ def potential():
 def current():
     return render_template('current.html')
 
+@app.route('/potential/getdata')
+def process_button():
+    # Call your Python function here
+    result = fetch_json()
 
+    listings = []
+    print(len(result["cat1"]["searchResults"]["mapResults"]))
+    for data in result["cat1"]["searchResults"]["mapResults"]:
+        if(data["statusType"] == "FOR_RENT"):
+            currList = [data["address"], data["price"]]
+            if "beds" in data:
+                currList.append(data["beds"])
+            else:
+                currList.append(data["minBeds"])
+            if "baths" in data:
+                currList.append(data["baths"])
+            else:
+                currList.append(data["minBaths"])
+            if "area" in data:
+                currList.append(data["area"])
+            else:
+                currList.append(data["minArea"])
+            listings.append(currList)
 
-@app.route('/handle_form_submission', methods=['POST'])
+    # You can do something with the result, e.g., pass it to the template
+    return listings
+
+@app.route('/form_submission', methods=['POST'])
 def form_submission():
     # Get the selected answer from the form data
     answer_value = request.form.get('resign')
 
     # Perform any necessary server-side processing
-    print("HERE")
+    form_data_dict = request.form.to_dict()
     # Redirect based on the answer
+    
+
+    # Convert the form data to JSON
+    print(form_data_dict)
+
+    # Save the JSON data to a file
+    
+    
     if answer_value == 'YES':
         f = open('output.json')
         # returns JSON object as
         # a dictionary
         data = json.load(f)
-
-
         prices = [item["unformattedPrice"] for item in data["cat1"]["searchResults"]["listResults"]]
         # Calculate the mean
-    if answer_value == 'YES':
         mean_price = sum(prices) / len(prices)
         return render_template('statistics.html', result = mean_price)  # Redirect to the "statistics" route
     elif answer_value in ['NO', 'UNDECIDED']:
