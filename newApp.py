@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify, make_response, url_for
+import firebase_admin
+from firebase_admin import credentials, db, auth
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -6,8 +8,64 @@ import requests
 import warnings
 import json
 import statistics
+import jwt
+import base64
+import datetime
+from datetime import datetime, timedelta
+from google.auth.transport.requests import Request
+from google.auth.transport.requests import AuthorizedSession
+from google.oauth2.credentials import Credentials
 
 app = Flask(__name__)
+
+# def renew_access_token(credentials):
+#     if credentials.valid:
+#         return credentials.token
+
+#     if credentials.expired and credentials.refresh_token:
+#         credentials.refresh(Request())
+
+#     return credentials.token
+
+# def create_custom_token(uid):
+#     # The uid argument should be a unique user identifier string.
+#     custom_token = auth.create_custom_token(uid)
+#     return custom_token
+
+# # id_token comes from the client app (shown above)
+# decoded_token = auth.verify_id_token(id_token)
+# uid = decoded_token['uid']
+
+# # Load Firebase Admin SDK with service account certificate
+# cert = credentials.Certificate("privKey.json")
+# firebase_admin.initialize_app(cert)
+# ref = db.reference('/')
+
+# try:
+#     data = ref.get()
+#     print("Successfully read data from the database:")
+#     print(data)
+# except Exception as e:
+#     print(f"Error reading data from the database: {e}")
+
+# # Set the expiration time to 60 minutes from now
+# expiration_time = datetime.utcnow() + timedelta(minutes=60)
+# expiration_timestamp = int(expiration_time.timestamp())
+
+# # Your payload data
+# payload_data = {
+#     'sub': 'user123',  # Example subject (user ID)
+#     'exp': expiration_timestamp,
+#     # Add other claims as needed
+# }
+
+# # Your secret key (replace with your actual secret)
+# secret_key = 'your_secret_key'
+
+# # Generate the JWT
+# token = jwt.encode(payload_data, secret_key, algorithm='HS256')
+
+
 
 @app.route('/')
 def index():
@@ -47,7 +105,40 @@ def process_button():
             listings.append(currList)
 
     # You can do something with the result, e.g., pass it to the template
-    return listings
+    return jsonify(listings)
+
+@app.route('/form_submission', methods=['POST'])
+def form_submission():
+    # Get the selected answer from the form data
+    answer_value = request.form.get('resign')
+
+    # Perform any necessary server-side processing
+    form_data_dict = request.form.to_dict()
+    # Redirect based on the answer
+    
+
+    # Convert the form data to JSON
+    print(form_data_dict)
+
+    # Save the JSON data to a file
+    # ref = db.reference('users/' + form_data_dict["address"])
+    # user_data = {
+    #     'resignStatus': form_data_dict["resign"],
+    #     'rating': form_data_dict["slider1"],
+    #     'noise': form_data_dict["slider2"]
+    # }
+    # ref.set(user_data)
+    if answer_value == 'YES':
+        f = open('output.json')
+        # returns JSON object as
+        # a dictionary
+        data = json.load(f)
+        prices = [item["unformattedPrice"] for item in data["cat1"]["searchResults"]["listResults"]]
+        # Calculate the mean
+        mean_price = sum(prices) / len(prices)
+        return render_template('statistics.html', result = mean_price)  # Redirect to the "statistics" route
+    elif answer_value in ['NO', 'UNDECIDED']:
+        return render_template('main.html')  # Redirect to the "main" route
 
 def fetch_json():
     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
@@ -61,7 +152,6 @@ def fetch_json():
     print(listing_response.json()["data"])
 
     return listing_response.json()["data"]
-
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -104,7 +104,7 @@
                 document.getElementById('data-display').innerText = JSON.stringify(data);
 
                 // Store the data for future use (e.g., in local storage)
-                localStorage.setItem('cachedData', JSON.stringify(data));
+                localStorage.setItem('cachedData', listings);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -112,11 +112,38 @@
 
         // Check if the data is already cached in local storage
         const cachedData = localStorage.getItem('cachedData');
+        let i = 0;
+        function incrementCounter(){
+            i++;
+            updateDisplay();
+        }
+        function decrementCounter(){
+            i--;
+            updateDisplay();
+        }
 
-        if (cachedData) {
-            // Use the cached data if available
-            document.getElementById('data-display').innerText = cachedData;
-        } else {
+        function updateDisplay() {
+            // Update the displayed value
+            const parsedData = JSON.parse(cachedData);
+            document.getElementById('data-display').innerHTML = `
+                <p>Address: ${parsedData[i][0]}</p>
+                <p>Price: ${parsedData[i][1]}</p>
+                <p>Beds: ${parsedData[i][2]}</p>
+                <p>Baths: ${parsedData[i][3]}</p>
+                <p>SqFt: ${parsedData[i][4]}</p>
+                <button onclick="decrementCounter()">&lt;</button>
+                <button onclick="incrementCounter()">&gt;</button>
+            `;
+        }
+
+        if(cachedData) {
+            const parsedData = JSON.parse(cachedData);
+            console.log(parsedData);
+
+            // Assuming 'data-display' is a div, you might want to display specific elements
+            updateDisplay();
+
+        }else{
             // Fetch data if not cached
             fetchData();
         }

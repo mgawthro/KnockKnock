@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify, make_response, url_for
+import firebase_admin
+from firebase_admin import credentials, db
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -8,6 +10,13 @@ import json
 import statistics
 
 app = Flask(__name__)
+
+cred = credentials.Certificate("privatekey.json")
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://knockknock-b4d72.firebaseio.com/'
+})
+
+database = db.reference()
 
 @app.route('/')
 def index():
