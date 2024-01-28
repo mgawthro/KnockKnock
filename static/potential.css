@@ -10,7 +10,7 @@
     --text-color: black;
     --background-color: lightgray;
     --accent-color: #ffbb00;
-    --accent-color1:#100653;
+    --accent-color1:black;
     --accent-text: whitesmoke;
 }
 input[type="text"], [type="button"]{ 
@@ -33,9 +33,8 @@ body {
 h1 {
     font-family: 'Tinos', serif;
     font-size: 34px;
-    font-weight: 350;
-    font-style: italic;
-    color: var(--accent-color);
+    font-weight: 400;
+    color: black;
     /* background-color: var(--accent-color); */
     padding: 10px;
     border-radius: 8px;
@@ -45,7 +44,7 @@ h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     font-weight: 350;
-    color: var(--accent-color1);
+    color: black;
     /* background-color: var(--accent-color); */
     padding: 10px;
     border-radius: 8px;
@@ -59,12 +58,14 @@ h2 {
     height: 100%;
     border-radius: 9px;
     background-color:var(--background-color);
+    padding: 20px;
 }
 #title-container {
     position: absolute;
     top: 10px;
     left: 10px;
     z-index: 1000;
+    top: 10%;
 }
 
 #out-map {
@@ -76,4 +77,23 @@ h2 {
     width: 500px;
     margin: 10px;
     /* Adjust map size as needed */
+}
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 350px;
+}
+button {
+    background-color:transparent;
+    color: black; 
+    font-size: 25px; 
+    border: none;
+    padding: 10px 20px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    border-radius: 9px;
+}
+
+button:hover {
+    background-color: lightskyblue; 
 }

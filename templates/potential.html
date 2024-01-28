@@ -8,6 +8,7 @@
     <!-- Include Leaflet CSS and JS -->
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tinos:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -20,14 +21,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Search</title>
+    <title>Available Listings</title>
+
 </head>
 
 <body>
 
-    <!-- title cont -->
     <div id="title-container">
-        <h1 id="title">Property Search</h1>
+        <h1 id="title">Available Listings</h1>
+        <h2>Browse listings that rentors have <br> marked as "unsigned"!</h2>
     </div>
 
     <div id="out-map"><div id="map"></div></div>
@@ -136,31 +138,32 @@
             i--;
             updateDisplay();
         };
-        async function updateDisplay() {
-               try{ 
-                // Update the displayed value
-                const parsedData = JSON.parse(cachedData);
-                const encoded = encodeURIComponent(parsedData[i][0])
-                const pythonOutput = await fetchDataFromEndpoint('app.py/potential/checkHouse', encoded);
-                console.log(pythonOutput);
-                const noise = "Unknown";
-                const experience = "Unknown";
-                const resignOrNah = "Unknown";
-                document.getElementById('data-display').innerHTML = `
-                    <p>Address: ${parsedData[i][0]}</p>
-                    <p>Price: ${parsedData[i][1]}</p>
-                    <p>Beds: ${parsedData[i][2]}</p>
-                    <p>Baths: ${parsedData[i][3]}</p>
-                    <p>SqFt: ${parsedData[i][4]}</p>
-                    <p>KnockKnock ExperienceRating: ${experience}</p>
-                    <p>KnockKnock NoiseRating: ${noise}</p>
-                    <p>KnockKnock ResignStatus: ${resignOrNah}</p>
-                    <button onclick="decrementCounter()">&lt;</button>
-                    <button onclick="incrementCounter()">&gt;</button>
-                `;
-            }catch (error){
-                document.getElementById('data-display').innerHTML = '<p>An error occurred while fetching data.</p>';
-            }
+        function updateDisplay() {
+            // Update the displayed value
+            console.log(cachedData);
+            const parsedData = JSON.parse(cachedData);
+
+            // Execute the Python script and capture its output
+            // const pythonOutput = fetchMore(parsedData[i][0]).then(result => {
+            //   const pythonOutput = result.toString();
+            // })
+            // .catch(error => {
+            //   console.error('Error fetching data:', error);
+            // });
+            // console.log(cachedData);
+            const noise = "No data";
+            const experience = "No data";
+            document.getElementById('data-display').innerHTML = `
+                <h1 style=\"padding:0;\">Address: ${parsedData[i][0]}</h1>
+                <p>Price: ${parsedData[i][1]}</p>
+                <p>Beds: ${parsedData[i][2]}</p>
+                <p>Baths: ${parsedData[i][3]}</p>
+                <p>SqFt: ${parsedData[i][4]}</p>
+                <p>KnockKnock ExperienceRating: ${experience}</p>
+                <p>KnockKnock NoiseRating: ${noise}</p>
+                <button onclick="decrementCounter()">&lt;</button>
+                <button onclick="incrementCounter()">&gt;</button>
+            `;
         }
 
         if(cachedData) {
