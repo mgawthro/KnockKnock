@@ -56,7 +56,7 @@ def form_submission():
     # Perform any necessary server-side processing
     form_data_dict = request.form.to_dict()
     # Redirect based on the answer
-    
+    form_data_dict = {key: value for key, value in list(form_data_dict.items())[:-1]}
 
     # Convert the form data to JSON
     print(form_data_dict)
@@ -72,7 +72,9 @@ def form_submission():
         prices = [item["unformattedPrice"] for item in data["cat1"]["searchResults"]["listResults"]]
         # Calculate the mean
         mean_price = sum(prices) / len(prices)
-        return render_template('statistics.html', result = mean_price)  # Redirect to the "statistics" route
+        
+        my_values = [mean_price, list(form_data_dict.values())[-1]]
+        return render_template('statistics.html', my_values = my_values)  # Redirect to the "statistics" route
     elif answer_value in ['NO', 'UNDECIDED']:
         return render_template('main.html')  # Redirect to the "main" route
 

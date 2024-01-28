@@ -4,13 +4,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <title>Button Link</title>
 </head>
-<body>
-
-    <h1>Welcome to My Website!</h1>
-
+<body style="display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #f0f0f0;">
     
+    <div id="bar-graph-container"></div>
+    <script>
+        var myValuesFromFlask = {{ my_values | tojson | safe }};
+
+        var firstValue = "{{ my_values[0] }}";
+        var secondValue = "{{ my_values[1] }}";
+        var data = [
+        { category: 'Average Rent', value: secondValue },
+        { category: 'Current Rent', value: firstValue }
+        ];
+
+        // Set up SVG dimensions
+    const width = 400;
+    const height = 300;
+    const margin = { top: 20, right: 20, bottom: 40, left: 40 };
+
+    // Create SVG element
+    const svg = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    // Create scales
+    const xScale = d3.scaleBand()
+        .domain(data.map(d => d.category))
+        .range([margin.left, width - margin.right])
+        .padding(0.1);
+
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.value)])
+        .range([height - margin.bottom, margin.top]);
+
+    // Draw bars
+    svg.selectAll("rect")
+        .data(data)
+        .enter().append("rect")
+        .attr("x", d => xScale(d.category))
+        .attr("y", d => yScale(d.value))
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => height - margin.bottom - yScale(d.value))
+        .attr("fill", "steelblue");
+
+    // Draw x-axis
+    svg.append("g")
+        .attr("transform", `translate(0, ${height - margin.bottom})`)
+        .call(d3.axisBottom(xScale));
+
+    // Draw y-axis
+    svg.append("g")
+        .attr("transform", `translate(${margin.left}, 0)`)
+        .call(d3.axisLeft(yScale));
+
+    // Add axis labels
+    svg.append("text")
+        .attr("transform", `translate(${width / 2}, ${height - margin.bottom + 30})`)
+        .style("text-anchor", "middle")
+        .text("Categories");
+
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", margin.left - 30)
+        .attr("x", -height / 2)
+        .style("text-anchor", "middle")
+        .text("Values");
+
+    </script>
 
 </body>
 </html>
