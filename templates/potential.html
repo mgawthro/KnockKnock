@@ -17,9 +17,6 @@
         href="https://unpkg.com/@geoapify/leaflet-address-search-plugin@^1/dist/L.Control.GeoapifyAddressSearch.min.css" />
     <script
         src="https://unpkg.com/@geoapify/leaflet-address-search-plugin@^1/dist/L.Control.GeoapifyAddressSearch.min.js"></script>
-</head>
-
-<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -110,21 +107,21 @@
                 console.error('Error fetching data:', error);
             }
         }
-        async function fetchMore(input){
-            try {
-                const response = await fetch(`/getDB.py/${input}`);
-                const result = await response.json();
+        // async function fetchMore(input){
+        //     try {
+        //         const response = await fetch(`/getDB.py/${input}`);
+        //         const result = await response.json();
             
-                // Handle the result as needed
-                console.log(result);
+        //         // Handle the result as needed
+        //         console.log(result);
             
-                // Update the display or perform other actions
-                return result;
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-        let res = fetchData();
+        //         // Update the display or perform other actions
+        //         return result;
+        //     } catch (error) {
+        //         console.error('Error fetching data:', error);
+        //     }
+        // }
+        // let res = fetchData();
         // Check if the data is already cached in local storage
         const cachedData = localStorage.getItem('cachedData');
         let i = 0;
@@ -141,8 +138,13 @@
             const parsedData = JSON.parse(cachedData);
 
             // Execute the Python script and capture its output
-            const pythonOutput = fetchMore(parsedData[i][0]).toString();
-            console.log(pythonOutput);
+            // const pythonOutput = fetchMore(parsedData[i][0]).then(result => {
+            //   const pythonOutput = result.toString();
+            // })
+            // .catch(error => {
+            //   console.error('Error fetching data:', error);
+            // });
+            // console.log(pythonOutput);
             const noise = "No data";
             const experience = "No data";
             document.getElementById('data-display').innerHTML = `
