@@ -24,7 +24,7 @@ def current():
 def process_button():
     # Call your Python function here
     result = your_python_function()
-
+    
     # You can do something with the result, e.g., pass it to the template
     return render_template('potential.html', result=result)
 
