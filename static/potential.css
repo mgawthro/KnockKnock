@@ -7,13 +7,13 @@
 }
 .theme1 {
     font-family: 'Montserrat', sans-serif;
-    --text-color: rgb(255, 255, 255);
-    --background-color: rgb(92, 145, 203);
+    --text-color: black;
+    --background-color: lightgray;
     --accent-color: #ffbb00;
     --accent-color1:#100653;
     --accent-text: whitesmoke;
 }
-input[type="text"], [type="button"]{
+input[type="text"], [type="button"]{ 
     font-size: 15px;
     font-weight:300; line-height:22px; 
     color:var(--acent3);
@@ -31,6 +31,7 @@ body {
     background-color: var(--accent3);
 }
 h1 {
+    font-family: 'Tinos', serif;
     font-size: 34px;
     font-weight: 350;
     font-style: italic;
@@ -41,9 +42,9 @@ h1 {
     margin: 15px;
 }
 h2 {
+    font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     font-weight: 350;
-    font-style: italic;
     color: var(--accent-color1);
     /* background-color: var(--accent-color); */
     padding: 10px;
