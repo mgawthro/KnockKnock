@@ -11,7 +11,7 @@
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden; 
+            overflow: scroll; 
             transition: background-color 0.5s; 
         }
 
@@ -43,10 +43,19 @@
             top: 40%;
             left: 10%;
         }
+        h3{
+            font-family: 'Tinos', sans-serif;
+            font-weight: 300;
+            font-size: 60px;
+            position: absolute;
+            top: 40%;
+            left: 10%;
+        }
         svg {
             position: absolute;
             top: 30px;
             left: 30px;
+            cursor: pointer;
         }
 
         #dotsdiv {
@@ -81,7 +90,7 @@
         }
 
         #circle:hover #dots {
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.5s;
         }
         .transition-button {
@@ -99,20 +108,91 @@
         .button-container {
             position: relative;
             top: 20px;
-            left: -10%;
-            transform: translateX(-50%);
+            left: -30%;
+            transform: translateX(-30%);
             display: flex;
             justify-content: space-between;
             max-width: 300px;
             width: 100%;
             transition: transform 0.7s; 
         }
+        #mainContent{
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: auto;
+            align-items: center;
+            justify-content: center;
+        }
+        #fullPageDiv {
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 100vh;
+            left: 0;
+            display: none;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            width: 30%;
+            justify-content: center;
+            padding: 30px 30px;
+            cursor: pointer;
+
+        }
+        .about{
+            top:100%;
+            width: 100%;
+            height: 100%;
+            position: absolute; 
+            background-color: lightgray;
+        }
+        .aboutInfo{
+            top: 50%;
+            left: 10%;
+            width: 70%;
+            height: 30%;
+            position: absolute; 
+            background-color: lightgray;
+        }
+        h4{
+            font-family: 'Tinos', sans-serif;
+            font-size: 25px;
+            font-weight: 300;
+            left: 20%;
+            width: 50%;
+        }
+        .scroll-icon {
+            position: fixed;
+            bottom: 7%;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            transition: transform 0.5s;
+            z-index: 1000; 
+        }
+
+        .scroll-icon svg {
+            fill: #000;
+            width: 40px;
+            height: 40px;
+        }
+
     </style>
 </head>
 <body>
     <div class="button-container" id="buttonContainer">
-        <button class="transition-button">Button 1</button>
-        <button class="transition-button">Button 2</button>
+        <a href="statistics.html" class="transition-button">Compare Rent</a>
+        <a href="potential.html" class="transition-button">View Listings</a>
+        <a href="#aboutDiv" class="transition-button">About</a>
     </div>
     <div id="circle" onclick="transitionButtons()">
         <div id="dotsdiv">
@@ -123,46 +203,85 @@
             </svg>
         </div>
     </div>
-    <div><span><h1>Knock Knock</h1></span></div>
+    <div class="mainContent "><span><h1>Knock Knock</h1></span></div>
+    <div class="scroll-icon" id="scrollIcon" onclick="scrollToTop()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </div>
     <div><h2>Are you resigning your lease?</h2></div>
-    <a href="{{ url_for('current') }}">
-        <div class = "yesno" style = "left: 25%;" id="yes">YES</div>
-    </a>
-    <a href="{{ url_for('current') }}">
-        <div class = "yesno" style = "left: 75%;" id="no">NO</div>
-    </a>
-    
+    <a href="current.html"><div class="yesno" style="left: 20%;" id="yes">YES</div></a>
+    <a href="current.html"><div class="yesno" style="left: 75%;" id="no">NO</div></a>
+
+    <div class="about" id="aboutDiv">
+        <h3 style="top: 25%;">About</h3>
+        <h2 style="font-style: italic; top: 40%">for renters, by renters</h2>
+        <div class="aboutInfo"><h4>According to a <a style="text-decoration:underline; margin: 0px; padding:0px;" href="https://rackham.umich.edu/wp-content/uploads/2022/06/Housing-Report-2021-Finalized.pdf">2021 study</a> by The University of Michigan's Rackham Graduate School, 
+            the largest issues students face when looking for housing are "Inaffordability", "Bad Quality", "Inavailability of Leasing Information", and the "Housing Search Process Timing".</h4> </div>
+        
+    </div>
+
 
     <script>
         var body = document.body;
         var yesButton = document.getElementById('yes');
-
+    
         yesButton.addEventListener('mouseover', function() {
             body.style.backgroundColor = 'rgb(0, 128, 0, 0.5)';
         });
-
+    
         yesButton.addEventListener('mouseout', function() {
             body.style.backgroundColor = ''; 
         });
+    
         var noButton = document.getElementById('no');
-
+    
         noButton.addEventListener('mouseover', function() {
             body.style.backgroundColor = 'rgb(255, 0, 0, 0.5)';
         });
-
+    
         noButton.addEventListener('mouseout', function() {
             body.style.backgroundColor = ''; 
         });
-
+    
         var body = document.body;
         var buttonContainer = document.getElementById('buttonContainer');
         var circle = document.getElementById('circle');
-
+    
         function transitionButtons() {
-            buttonContainer.style.transform = 'translateX(70%)';
-            circle.style.display = 'none';
+            var circle = document.getElementById("circle");
+            var buttonContainer = document.getElementById("buttonContainer");
+    
+            if (!circle.clicked) {
+                buttonContainer.style.transform = 'translateX(350%)';
+                circle.clicked = true;
+            } else {
+                buttonContainer.style.transform = 'translateX(-30%)'; 
+                circle.clicked = false;
+            }
+        }
+    
+        var scrollIcon = document.getElementById('scrollIcon');
+        var scrolled = false;
+    
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 0 && !scrolled) {
+                scrollIcon.style.transform = 'translateX(-50%) scaleY(-1)';
+                scrolled = true;
+            } else if (window.scrollY === 0 && scrolled) {
+                scrollIcon.style.transform = 'translateX(-50%)';
+                scrolled = false;
+            }
+        });
+    
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function scrollToBott() {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
     </script>
+    
 
 </body>
 </html>
