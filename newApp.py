@@ -140,12 +140,15 @@ def form_submission():
         # returns JSON object as
         # a dictionary
         data = json.load(f)
+        print(data)
         prices = [item["unformattedPrice"] for item in data["cat1"]["searchResults"]["listResults"]]
         # Calculate the mean
         mean_price = sum(prices) / len(prices)
-        return render_template('statistics.html', result = mean_price)  # Redirect to the "statistics" route
+        my_values = [form_data_dict["Rent"], mean_price]
+        print(my_values)
+        return render_template('statistics.html', my_values = mean_price)  # Redirect to the "statistics" route
     elif answer_value in ['NO', 'UNDECIDED']:
-        return render_template('main.html')  # Redirect to the "main" route
+        return render_template('potential.html')  # Redirect to the "main" route
 
 def fetch_json():
     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
