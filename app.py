@@ -11,7 +11,7 @@ import statistics
 
 app = Flask(__name__)
 
-cred = credentials.Certificate("privatekey.json")
+cred = credentials.Certificate("privKey.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://knockknock-b4d72.firebaseio.com/'
 })
