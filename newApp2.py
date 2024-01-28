@@ -29,7 +29,7 @@ def form_submission():
     answer_value = request.form.get('resign')
 
     # Perform any necessary server-side processing
-
+    print("HERE")
     # Redirect based on the answer
     if answer_value == 'YES':
         f = open('output.json')

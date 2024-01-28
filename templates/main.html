@@ -125,8 +125,13 @@
     </div>
     <div><span><h1>Knock Knock</h1></span></div>
     <div><h2>Are you resigning your lease?</h2></div>
-    <a href="current.html"><div class="yesno" style="left: 25%;" id="yes">YES</div></a>
-    <a href="current.html"><div class="yesno" style="left: 75%;" id="no">NO</div></a>
+    <a href="{{ url_for('current') }}">
+        <div class = "yesno" style = "left: 25%;" id="yes">YES</div>
+    </a>
+    <a href="{{ url_for('current') }}">
+        <div class = "yesno" style = "left: 75%;" id="no">NO</div>
+    </a>
+    
 
     <script>
         var body = document.body;
