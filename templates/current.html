@@ -1,122 +1,133 @@
 <!DOCTYPE html>
-<html lang="en" class="theme1 ">
-<link rel="stylesheet" href="current.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+<html lang="en" class="theme1">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src = "script.js"></script>
-    <title>
-    </title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tinos:wght@400;700&display=swap">
+
+    <style>
+        .theme1 {
+            font-family: 'Montserrat', sans-serif;
+            --text-color: black;
+            --background-color: whitesmoke;
+            --accent-color: #100653;
+            --accent-text: #ffbb00;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: auto;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        form {
+            max-width: 400px;
+            padding: 20px;
+            background-color: transparent;
+            border: 2px solid black;
+            background-color: var(--background-color);
+        }
+
+        h2 {
+            font-family: 'Tinos', serif;
+            font-size: 24px;
+            font-weight: 350;
+            color: black;
+            border-radius: 8px;
+            margin-bottom: 15px;
+
+        }
+
+        label[type="text"] {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            background-color: var(--accent-color);
+            color: var(--accent-text);
+            border-radius: 8px;
+            border: none;
+            letter-spacing: 1px;
+            padding-top: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input[type="text"], [type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-bottom: 10px;
+            font-family: 'Tinos', serif;
+            font-weight: 300;
+            font-size: 20px;
+            background-color: transparent;
+            border: 2px solid black;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: opacity 0.5s;
+            margin-bottom: 20px;
+            width: 100%;
+            
+        }
+        button:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #autocomplete-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-top: none;
+            position: absolute;
+            z-index: 1000;
+            background-color: whitesmoke;
+            opacity: 1;
+        }
+
+        #autocomplete-list li {
+            padding: 10px;
+            cursor: pointer;
+            background-color: whitesmoke;
+            opacity: 1;
+        }
+
+        #autocomplete-list li:hover {
+            background-color: white;
+            opacity: 1;
+        }
+
+    </style>
+
 </head>
-<script src = "script.js"></script>
-<style>
-    .theme1 {
-        font-family: 'Montserrat', sans-serif;
-        --text-color: rgb(92, 145, 203); /* rgb(255, 255, 255); */
-        --background-color: whitesmoke;
-        --accent-color: #100653;
-        --accent-color1:#100653;
-        --accent-text: #ffbb00;
-    }
-
-    body {
-        margin: 0;
-        font-family: 'Montserrat', sans-serif;
-        background-color: var(--background-color);
-        color: var(--text-color);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh; 
-        overflow: auto;
-    }
-
-    form {
-        max-width: 400px;
-        padding: 20px;
-        align-items: center;
-        /* background-color: rgba(255, 255, 255, 0.9); */
-        /* border-radius: 10px; */
-        /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
-    }
-
-    h2 {
-        font-size: 24px;
-        font-weight: 350;
-        font-style: italic;
-        color: var(--accent-color);
-        /* background-color: var(--accent-color); */
-        padding: 10px;
-        border-radius: 8px;
-        margin-bottom: 15px;
-    }
-
-    label[type="text"] {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 24px;
-        background-color: var(--accent-color);
-        color: var(--accent-text);
-        border-radius: 8px;
-        border: none;
-        letter-spacing: 1px;
-        padding: 10px;
-        padding-top: 20px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        display: block;
-    }
-
-    input[type="text"], [type="number"]{
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #eee;
-        border-radius: 8px;
-        font-size: 16px;
-        margin-bottom: 20px;
-        margin-top: 20px;
-    }
-
-    button [type="reset"] {
-        background-color: var(--accent-text);
-        color: var(--accent-text);
-        border: none;
-        border-radius: 8px;
-        padding-top: 10px;
-        padding: 12px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin-bottom: 20px;
-    }
-
-    button {
-        background-color: var(--text-color);
-        color: var(--accent-text);
-        border: none;
-        border-radius: 8px;
-        padding-top: 10px;
-        padding: 12px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin-bottom: 20px;
-        height:40px;
-        width: 100%;
-        display:flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    button:hover {
-        background-color: darken(var(--text-color), 10%);
-        color:var(--accent-color);
-    }
-</style>
 <body>
-    <form id = "currentPosting" action="{{ url_for('form_submission') }}" method="post">
+    <div class="hiddenmap" id="map"></div>
+    
+
+    <form id="currentPosting" action="{{ url_for('form_submission') }}" method="post">
         <h2>General Questions</h2>
         
         <label for="status">Do you plan to resign your current lease?</label><br>
@@ -126,50 +137,62 @@
         <label for="no">No</label><br>
         <input type="radio" id="undecided" name="resign" value="UNDECIDED">
         <label for="undecided">Undecided</label><br><br>
-
-        <label for="addy">What's the address of your current lease?</label><br>
-        <input type = "text" id = "addy" name = "address"><br>
+        
+        <label for="addy">What's the address of your current lease?</label>
+        <input type="text" id="addy" placeholder="Type an address">
+        <ul id="autocomplete-list"></ul>
 
         <p>What was your overall experience here?</p>
         <label for="overall-slider"></label>
-            <span style="font-size: 30px;">&#128169</span> 
-            <input style="width: 65%; background:grey;" type="range" id="slider1" name="slider1" min="0" max="100" step="1" value="50">
-            <span style="font-size: 30px;">&#x1f525</span>
-        </label> <br><br>
+        <span style="font-size: 30px;">&#128169;</span> 
+        <input style="width: 65%; background:grey;" type="range" id="slider" name="slider" min="0" max="100" step="1" value="50">
+        <span style="font-size: 30px;">&#x1f525;</span>
+        <br><br>
 
         <h2>Listing Details</h2>
         
         <p>Neighborhood vibes?</p>
         <label for="party-slider"></label>
-            <span style="font-size: 30px;">	&#x1f475</span> 
-            <input style="width: 65%; background:grey;" type="range" id="slider2" name="slider2" min="0" max="100" step="1" value="50">
-            <span style="font-size: 30px;">	&#127881</span>
-        </label> <br><br>
-        <!---
-        <label for="rentRange">What is your rent range?</label><br><br>
-        <input type = "radio" id = "rentRange" name = "Rent &lt;800" value = "YES">
-        <label for = "Rent &lt;800">&lt 800</label><br>
-        <input type = "radio" id = "rentRange" name = "Rent 800-1000" value = "YES">
-        <label for = "Rent 800-1000">800-1000</label><br>
-        <input type = "radio" id = "rentRange" name = "Rent 1000-1200" value = "YES">
-        <label for = "Rent 1000-1200">1000-1200</label><br>
-        <input type = "radio" id = "rentRange" name = "Rent 1200-1400" value = "YES">
-        <label for = "Rent 1200-1400">1200-1400</label><br>
-        <input type = "radio" id = "rentRange" name = "Rent &gt;1400" value = "YES">
-        <label for = "Rent &gt;1400">&gt 1400</label><br>
+        <span style="font-size: 30px;">	&#x1f475;</span> 
+        <input style="width: 65%; background:grey;" type="range" id="slider" name="slider" min="0" max="100" step="1" value="50">
+        <span style="font-size: 30px;">	&#127881;</span>
+        <br><br>
 
-        -->
-
-        <label for="rentRange">What is your rent?</label><br><br>
+        <label for="rentRange">How much is your rent?</label><br><br>
         <input type = "number" id = "rent" name = "Rent">
-        <!-- Submit Button! -->
+
+        <!-- Submit Button -->
         <br>
         <a href="{{ url_for('potential') }}">
-            <button class="button">Submit</button>
+            <button type="button" class="transition-button">Submit</button>
         </a>
-        <button type="reset" value="Reset">Reset</button>
     </form>
+    <script>
+        //array?
+        const addresses = [
+            "701 Catherine St, Ann Arbor, MI", 
+            "5377 Standish Dr, Troy, MI"
+        ];
+    
+        const input = document.getElementById("addy");
+        const autocompleteList = document.getElementById("autocomplete-list");
+        input.addEventListener("input", function () {
+            const inputValue = this.value.toLowerCase();
+            autocompleteList.innerHTML = '';
 
+            const filteredAddresses = addresses.filter(address => address.toLowerCase().includes(inputValue));
+
+            filteredAddresses.forEach(address => {
+                const listItem = document.createElement("li");
+                listItem.textContent = address;
+                autocompleteList.appendChild(listItem);
+    
+                listItem.addEventListener("click", function () {
+                    input.value = address;
+                    autocompleteList.innerHTML = ''; 
+                });
+            });
+        });
+    </script>
 </body>
-
 </html>
