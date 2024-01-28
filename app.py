@@ -30,8 +30,18 @@ def handle_form_submission():
 
     # Redirect based on the answer
     if answer_value == 'YES':
-        result = getstats()
-        return render_template('statistics.html', result = result)  # Redirect to the "statistics" route
+        # mean = readjson()
+        f = open('output.json')
+        # returns JSON object as
+        # a dictionary
+        data = json.load(f)
+
+
+        prices = [item["unformattedPrice"] for item in data["cat1"]["searchResults"]["listResults"]]
+        print(prices)
+        # Calculate the mean
+        mean_price = sum(prices) / len(prices)
+        return render_template('statistics.html', result = mean)  # Redirect to the "statistics" route
 
     elif answer_value in ['NO', 'UNDECIDED']:
         return render_template('main.html')  # Redirect to the "main" route
@@ -56,6 +66,15 @@ def fetch_json():
     print(listing_response.json()["data"])
     return listing_response.json()["data"]
 
+def readjson():
+    f = open('output.json')
+    datum = json.load(f)
+    prices = [item["unformattedPrice"] for item in data["cat1"]["searchResults"]["listResults"]]
+    # Calculate the mean
+    mean_price = sum(prices) / len(prices)
+    print(mean_price)
+    return mean_price, statistics.median(prices)
+    
 def getstats():
     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
 

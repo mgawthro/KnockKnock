@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="theme1 ">
-<link rel="stylesheet" href="current.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='current.css') }}">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
 <head>
     <meta charset="UTF-8">
@@ -12,29 +12,20 @@
 <body>
     <form id = "currentPosting">
         <h2>General Questions</h2>
-        
+        <label for="addy">Enter your address:</label><br>
+        <input type = "text" id = "addy" name = "address"><br>
         <label for="status">Do you plan to resign your current lease?</label><br>
         <input type="radio" id="yes" name="resign" value="YES">
         <label for="yes">Yes</label><br>
         <input type="radio" id="no" name="resign" value="NO">
         <label for="no">No</label><br>
         <input type="radio" id="undecided" name="resign" value="UNDECIDED">
-        <label for="undecided">Undecided</label><br><br>
-
-        <label for="addy">What's the address of your current lease?</label><br>
-        <input type = "text" id = "addy" name = "address"><br>
-
-        <p>What was your overall experience here?</p>
-        <label for="overall-slider"></label>
-            <span style="font-size: 30px;">&#128169</span> 
-            <input style="width: 65%; background:grey;" type="range" id="slider" name="slider" min="0" max="100" step="1" value="50">
-            <span style="font-size: 30px;">&#x1f525</span>
-        </label> <br><br>
-
-        <!-- <label for="company">Enter the rental company assoicated with your property:</label><br>
-        <input type = "text" id = "company" name = "company"><br> -->
+        <label for="undecided">Undecided</label><br>
+        <br>
+        <label for="company">Enter the rental company assoicated with your property:</label><br>
+        <input type = "text" id = "company" name = "company"><br>
         <h2>Listing Details</h2>
-        <!-- <label for="sqft">Square Footage?</label><br>
+        <label for="sqft">Square Footage?</label><br>
         <input type = "number" id = "sqft" name = "squareFoot" pattern = [0-9]+><br>
         <label for="bed">Bedroom(s)?</label><br>
         <input type = "number" id = "bed" name = "bedroom" min = 0 max = 9 pattern = [0-9]><br>
@@ -48,16 +39,8 @@
         <label for="furnished">Furnished</label><br>
         <input type="checkbox" id="parking" name="amenities" value="UNDECIDED">
         <label for="parking">Parking</label><br>
-        <br> -->
-       
-        <p>Neighborhood vibes?</p>
-        <label for="party-slider"></label>
-            <span style="font-size: 30px;">	&#x1f475</span> 
-            <input style="width: 65%; background:grey;" type="range" id="slider" name="slider" min="0" max="100" step="1" value="50">
-            <span style="font-size: 30px;">	&#127881</span>
-        </label> <br><br>
-
-        <label for="rentRange">What is your rent range?</label><br><br>
+        <br>
+        <label for="rentRange">What is your rent range?</label><br>
         <input type = "radio" id = "rentRange" name = "Rent &lt;800" value = "YES">
         <label for = "Rent &lt;800">&lt 800</label><br>
         <input type = "radio" id = "rentRange" name = "Rent 800-1000" value = "YES">
@@ -69,9 +52,9 @@
         <input type = "radio" id = "rentRange" name = "Rent &gt;1400" value = "YES">
         <label for = "Rent &gt;1400">&gt 1400</label><br>
         <!-- Submit Button! -->
-        <br><span>
-        <button type="button" onclick="validateInput();dumpFormData()">Submit</button></span>
-        <!-- <button type="reset" value="Reset">Reset</button> -->
+        <br>
+        <button type="button" onclick="validateInput();dumpFormData()">Submit</button>
+        <button type="reset" value="Reset">Reset</button>
     </form>
 
 </body>
