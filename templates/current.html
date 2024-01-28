@@ -116,7 +116,7 @@
     }
 </style>
 <body>
-    <form id = "currentPosting" action="{{ url_for('handle_form_submission') }}" method="post">
+    <form id = "currentPosting" action="{{ url_for('form_submission') }}" method="post">
         <h2>General Questions</h2>
         
         <label for="status">Do you plan to resign your current lease?</label><br>
@@ -176,7 +176,9 @@
         <label for = "Rent &gt;1400">&gt 1400</label><br>
         <!-- Submit Button! -->
         <br>
-        <button type="button" >Submit</button>
+        <a href="{{ url_for('potential') }}">
+            <button class="button">Submit</button>
+        </a>
         <button type="reset" value="Reset">Reset</button>
     </form>
 

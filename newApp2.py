@@ -24,7 +24,7 @@ def current():
 
 
 @app.route('/handle_form_submission', methods=['POST'])
-def handle_form_submission():
+def form_submission():
     # Get the selected answer from the form data
     answer_value = request.form.get('resign')
 
@@ -39,7 +39,6 @@ def handle_form_submission():
 
 
         prices = [item["unformattedPrice"] for item in data["cat1"]["searchResults"]["listResults"]]
-        print(prices)
         # Calculate the mean
     if answer_value == 'YES':
         mean_price = sum(prices) / len(prices)
