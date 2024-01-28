@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" class="theme1">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='potential.css') }}">
+<link rel="stylesheet" href="potential.css">
 <title>Property Search </title>
 
 <head>
-<!-- Include Leaflet CSS and JS -->
+    <!-- Include Leaflet CSS and JS -->
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-<link rel="stylesheet" href="https://unpkg.com/@geoapify/leaflet-address-search-plugin@^1/dist/L.Control.GeoapifyAddressSearch.min.css" />
-<script src="https://unpkg.com/@geoapify/leaflet-address-search-plugin@^1/dist/L.Control.GeoapifyAddressSearch.min.js"></script>
+    <link rel="stylesheet"
+        href="https://unpkg.com/@geoapify/leaflet-address-search-plugin@^1/dist/L.Control.GeoapifyAddressSearch.min.css" />
+    <script
+        src="https://unpkg.com/@geoapify/leaflet-address-search-plugin@^1/dist/L.Control.GeoapifyAddressSearch.min.js"></script>
 </head>
 
 <head>
@@ -21,6 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Search</title>
 </head>
+
 <body>
 
     <!-- title cont -->
@@ -28,35 +33,45 @@
         <h1 id="title">Property Search</h1>
     </div>
 
-    <div id="out-map" ><div id="map"></div></div>
+    <div id="out-map"><div id="map"></div></div>
 
     <script>
-        function popupDiv(){
+        function popupDiv() {
             var otr = document.createElement("div");
             otr.setAttribute("class", "popup");
-            otr.innerHTML =  "<h2>" + "House Details: " +"</h2>" 
-                + "<br>"+ "</br>"
-                + "<div>" 
-                    //here goes house json info
-                + "</div>";
+            otr.innerHTML = "<h2>" + "House Details: " + "</h2>"
+                + "<br>" + "</br>"
+                + "<div>"
+                // here goes house json info
+                + "</div>"
+                + "<button onclick='backPage()' style='float: left;'>&#8249;</button>"
+                + "<button onclick='nextPage()' style='float: right;'>&#8250;</button>";
             document.body.appendChild(otr);
             var mapDiv = document.getElementById("out-map");
             mapDiv.style.transition = "transform 0.5s";
             mapDiv.style.transform = "translate(-0%, -13%)";
         }
 
+        function backPage() {
+            // back on list
+        }
+
+        function nextPage() {
+            // front on list 
+        }
+
         var map = L.map('map').setView([42.2808, -83.7430], 14);
         var myAPIkey = "36fc6ce18849487b8fdad29829ac9555";
         var mapURL = `https://maps.geoapify.com/v1/tile/klokantech-basic/{z}/{x}/{y}.png?apiKey=${myAPIkey}`;
-    
+
         L.tileLayer(mapURL, {
             attribution: 'Powered by Geoapify | © OpenMapTiles © OpenStreetMap contributors',
             apiKey: myAPIkey,
             mapStyle: "klokantech-basic",
         }).addTo(map);
-    
+
         var marker;
-    
+
         const addressSearchControl = L.control.addressSearch(myAPIkey, {
             position: 'topright',
             resultCallback: (address) => {
@@ -75,14 +90,12 @@
                 // marker.bindPopup(popupContent);
                 marker.on('click', () => {
                     popupDiv();
-			    });
+                });
             },
         });
         map.addControl(addressSearchControl);
     </script>
 
-    <button id = "post">Hello</button>
-    
 </body>
-</html>
 
+</html>
