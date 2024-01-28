@@ -10,7 +10,7 @@
     </title>
 </head>
 <body>
-    <form id = "currentPosting" action="{{ url_for('handle_form_submission') }}" method="post">
+    <form id = "currentPosting">
         <h2>General Questions</h2>
         
         <label for="status">Do you plan to resign your current lease?</label><br>
@@ -73,29 +73,6 @@
         <button type="button" onclick="validateInput();dumpFormData()">Submit</button></span>
         <!-- <button type="reset" value="Reset">Reset</button> -->
     </form>
-
-    <script>
-        function submitForm(event) {
-            //event.preventDefault(); // Prevent the default form submission
-
-            // Get the selected answer
-            const answer = document.querySelector('input[name="resign"]:checked');
-            console.log(answer.value)
-            // Redirect based on the answer
-            if (answer) {
-                const answerValue = answer.value;
-                if (answerValue === 'YES') {
-                    window.location.href = 'statistics.html'; // Redirect to the "Yes" page
-                } else if (answerValue === 'NO') {
-                    window.location.href = 'main.html'; // Redirect to the "No" page
-                } else if (answerValue === 'UNDECIDED') {
-                    window.location.href = 'main.html'; // Redirect to the "Undecided" page
-                }
-            } else {
-                alert('Please select an option before submitting.');
-            }
-        }
-    </script>
 
 </body>
 <script src = "script.js"></script>
