@@ -59,7 +59,7 @@ def handle_form_submission():
 def process_button():
     # Call your Python function here
     result = fetch_json()
-    
+
     listings = []
     for data in result["cat1"]["searchResults"]["mapResults"]:
         if(data["statusType"] == "FOR_RENT"):
