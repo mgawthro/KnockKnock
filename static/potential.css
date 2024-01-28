@@ -77,3 +77,21 @@ h2 {
     margin: 10px;
     /* Adjust map size as needed */
 }
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 300px;
+}
+button {
+    background-color:transparent;
+    color: black; 
+    font-size: 18px; 
+    border: none;
+    padding: 10px 20px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+
+button:hover {
+    background-color: lightskyblue; 
+}
