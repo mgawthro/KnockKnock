@@ -190,7 +190,6 @@
 </head>
 <body>
     <div class="button-container" id="buttonContainer">
-        <a href="statistics.html" class="transition-button">Compare Rent</a>
         <a href="{{ url_for('potential') }}" class="transition-button">View Listings</a>
         <a href="#aboutDiv" class="transition-button">About</a>
     </div>
@@ -210,8 +209,8 @@
         </svg>
     </div>
     <div><h2>Are you resigning your lease?</h2></div>
-    <a href="current.html"><div class="yesno" style="left: 20%;" id="yes">YES</div></a>
-    <a href="current.html"><div class="yesno" style="left: 75%;" id="no">NO</div></a>
+    <a href="{{ url_for('current') }}"><div class="yesno" style="left: 20%;" id="yes">YES</div></a>
+    <a href="{{ url_for('current') }}"><div class="yesno" style="left: 75%;" id="no">NO</div></a>
 
     <div class="about" id="aboutDiv">
         <h3 style="top: 25%;">About</h3>

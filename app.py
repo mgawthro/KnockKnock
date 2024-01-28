@@ -36,6 +36,9 @@ def handle_form_submission():
     answer_value = request.form.get('resign')
 
     # Perform any necessary server-side processing
+    form_data_dict = request.form.to_dict()
+    # Redirect based on the answer
+    form_data_dict = {key: value for key, value in list(form_data_dict.items())[:-1]}
 
     # Redirect based on the answer
     if answer_value == 'YES':
@@ -50,10 +53,11 @@ def handle_form_submission():
         print(prices)
         # Calculate the mean
         mean_price = sum(prices) / len(prices)
-        return render_template('statistics.html', result = mean)  # Redirect to the "statistics" route
+        my_values = [mean_price, list(form_data_dict.values())[-1]]
+        return render_template('statistics.html', my_values = my_values)  # Redirect to the "statistics" route
 
     elif answer_value in ['NO', 'UNDECIDED']:
-        return render_template('main.html')  # Redirect to the "main" route
+        return render_template('potential.html')  # Redirect to the "main" route
 
 @app.route('/potential/getdata')
 def process_button():
@@ -80,6 +84,29 @@ def process_button():
 
     # You can do something with the result, e.g., pass it to the template
     return listings
+
+@app.route('/potential/checkHouse/<input>', methods = ["POST"])
+def checkDaHouse():
+    try:
+        data = request.form.get('data')
+        
+        # Initialize Firebase Admin SDK
+        cred = credentials.Certificate("privKey.json")
+        firebase_admin.initialize_app(cred, {
+            'databaseURL': 'https://knockknock-b4d72-default-rtdb.firebaseio.com/'
+        })
+
+        # Get a reference to the root of your database
+        root_ref = db.reference()
+
+        # Query users with userName equal to "Nick123"
+        query_result = root_ref.child("users").order_by_child("userName").equal_to(data).get()
+        # Process the data (replace this with your actual processing logic)
+
+        return jsonify(dict(query_result))
+
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 def fetch_json():
     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"

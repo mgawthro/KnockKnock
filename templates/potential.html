@@ -107,20 +107,23 @@
                 console.error('Error fetching data:', error);
             }
         }
-        // async function fetchMore(input){
-        //     try {
-        //         const response = await fetch(`/getDB.py/${input}`);
-        //         const result = await response.json();
-            
-        //         // Handle the result as needed
-        //         console.log(result);
-            
-        //         // Update the display or perform other actions
-        //         return result;
-        //     } catch (error) {
-        //         console.error('Error fetching data:', error);
-        //     }
-        // }
+        async function fetchDataFromEndpoint(endpoint, input) {
+            try {
+                const response = await fetch(`/${endpoint}/${input}`, {
+                    method: "POST",
+                });
+                const result = await response.json();
+
+                // Handle the result as needed
+                console.log(result);
+
+                // Update the display or perform other actions
+                return result;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
         // let res = fetchData();
         // Check if the data is already cached in local storage
         const cachedData = localStorage.getItem('cachedData');
@@ -133,32 +136,31 @@
             i--;
             updateDisplay();
         };
-        function updateDisplay() {
-            // Update the displayed value
-            console.log(cachedData);
-            const parsedData = JSON.parse(cachedData);
-
-            // Execute the Python script and capture its output
-            // const pythonOutput = fetchMore(parsedData[i][0]).then(result => {
-            //   const pythonOutput = result.toString();
-            // })
-            // .catch(error => {
-            //   console.error('Error fetching data:', error);
-            // });
-            // console.log(cachedData);
-            const noise = "No data";
-            const experience = "No data";
-            document.getElementById('data-display').innerHTML = `
-                <p>Address: ${parsedData[i][0]}</p>
-                <p>Price: ${parsedData[i][1]}</p>
-                <p>Beds: ${parsedData[i][2]}</p>
-                <p>Baths: ${parsedData[i][3]}</p>
-                <p>SqFt: ${parsedData[i][4]}</p>
-                <p>KnockKnock ExperienceRating: ${experience}</p>
-                <p>KnockKnock NoiseRating: ${noise}</p>
-                <button onclick="decrementCounter()">&lt;</button>
-                <button onclick="incrementCounter()">&gt;</button>
-            `;
+        async function updateDisplay() {
+               try{ 
+                // Update the displayed value
+                const parsedData = JSON.parse(cachedData);
+                const encoded = encodeURIComponent(parsedData[i][0])
+                const pythonOutput = await fetchDataFromEndpoint('app.py/potential/checkHouse', encoded);
+                console.log(pythonOutput);
+                const noise = "Unknown";
+                const experience = "Unknown";
+                const resignOrNah = "Unknown";
+                document.getElementById('data-display').innerHTML = `
+                    <p>Address: ${parsedData[i][0]}</p>
+                    <p>Price: ${parsedData[i][1]}</p>
+                    <p>Beds: ${parsedData[i][2]}</p>
+                    <p>Baths: ${parsedData[i][3]}</p>
+                    <p>SqFt: ${parsedData[i][4]}</p>
+                    <p>KnockKnock ExperienceRating: ${experience}</p>
+                    <p>KnockKnock NoiseRating: ${noise}</p>
+                    <p>KnockKnock ResignStatus: ${resignOrNah}</p>
+                    <button onclick="decrementCounter()">&lt;</button>
+                    <button onclick="incrementCounter()">&gt;</button>
+                `;
+            }catch (error){
+                document.getElementById('data-display').innerHTML = '<p>An error occurred while fetching data.</p>';
+            }
         }
 
         if(cachedData) {
