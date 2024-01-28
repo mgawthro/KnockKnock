@@ -85,10 +85,12 @@ def current():
 @app.route('/potential/getdata')
 def process_button():
     # Call your Python function here
-    result = fetch_json()
+    # result = fetch_json()
+    f = open("output.json")
+    result = json.load(f)
+    print(result)
 
     listings = []
-    print(len(result["cat1"]["searchResults"]["mapResults"]))
     for data in result["cat1"]["searchResults"]["mapResults"]:
         if(data["statusType"] == "FOR_RENT"):
             currList = [data["address"], data["price"]]
@@ -107,7 +109,7 @@ def process_button():
             listings.append(currList)
 
     # You can do something with the result, e.g., pass it to the template
-    return jsonify(listings)
+    return listings
 
 @app.route('/form_submission', methods=['POST'])
 def form_submission():

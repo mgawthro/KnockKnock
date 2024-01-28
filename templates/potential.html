@@ -104,12 +104,26 @@
                 document.getElementById('data-display').innerText = JSON.stringify(data);
 
                 // Store the data for future use (e.g., in local storage)
-                localStorage.setItem('cachedData', listings);
+                localStorage.setItem('cachedData', JSON.stringify(data));
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         }
-
+        async function fetchMore(input){
+            try {
+                const response = await fetch(`/getDB.py/${input}`);
+                const result = await response.json();
+            
+                // Handle the result as needed
+                console.log(result);
+            
+                // Update the display or perform other actions
+                return result;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchData();
         // Check if the data is already cached in local storage
         const cachedData = localStorage.getItem('cachedData');
         let i = 0;
@@ -120,11 +134,14 @@
         function decrementCounter(){
             i--;
             updateDisplay();
-        }
-
+        };
         function updateDisplay() {
             // Update the displayed value
             const parsedData = JSON.parse(cachedData);
+
+            // Execute the Python script and capture its output
+            const pythonOutput = fetchMore(parsedData[i][0]).toString();
+            console.log(pythonOutput);
             const noise = "No data";
             const experience = "No data";
             document.getElementById('data-display').innerHTML = `
@@ -143,10 +160,8 @@
         if(cachedData) {
             const parsedData = JSON.parse(cachedData);
             console.log(parsedData);
-
             updateDisplay();
         }else{
-            // Fetch data if not cached
             fetchData();
         }
     </script>
