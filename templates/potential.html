@@ -34,23 +34,23 @@
     </div>
 
     <div id="out-map"><div id="map"></div></div>
-    <div id = "data-display"> </div>
+    <div class="popup" id = "data-display"> </div>
     <script>
-        function popupDiv() {
-            var otr = document.createElement("div");
-            otr.setAttribute("class", "popup");
-            otr.innerHTML = "<h2>" + "House Details: " + "</h2>"
-                + "<br>" + "</br>"
-                + "<div>"
-                // here goes house json info
-                + "</div>"
-                + "<button onclick='backPage()' style='float: left;'>&#8249;</button>"
-                + "<button onclick='nextPage()' style='float: right;'>&#8250;</button>";
-            document.body.appendChild(otr);
-            var mapDiv = document.getElementById("out-map");
-            mapDiv.style.transition = "transform 0.5s";
-            mapDiv.style.transform = "translate(-0%, -13%)";
-        }
+        // function popupDiv() {
+        //     var otr = document.createElement("div");
+        //     otr.setAttribute("class", "popup");
+        //     otr.innerHTML = "<h2>" + "House Details: " + "</h2>"
+        //         + "<br>" + "</br>"
+        //         + "<div>"
+        //         // here goes house json info
+        //         + "</div>"
+        //         + "<button onclick='backPage()' style='float: left;'>&#8249;</button>"
+        //         + "<button onclick='nextPage()' style='float: right;'>&#8250;</button>";
+        //     document.body.appendChild(otr);
+        //     var mapDiv = document.getElementById("out-map");
+        //     mapDiv.style.transition = "transform 0.5s";
+        //     mapDiv.style.transform = "translate(-0%, -13%)";
+        // }
 
         function backPage() {
             // back on list
@@ -125,12 +125,16 @@
         function updateDisplay() {
             // Update the displayed value
             const parsedData = JSON.parse(cachedData);
+            const noise = "No data";
+            const experience = "No data";
             document.getElementById('data-display').innerHTML = `
                 <p>Address: ${parsedData[i][0]}</p>
                 <p>Price: ${parsedData[i][1]}</p>
                 <p>Beds: ${parsedData[i][2]}</p>
                 <p>Baths: ${parsedData[i][3]}</p>
                 <p>SqFt: ${parsedData[i][4]}</p>
+                <p>KnockKnock ExperienceRating: ${experience}</p>
+                <p>KnockKnock NoiseRating: ${noise}</p>
                 <button onclick="decrementCounter()">&lt;</button>
                 <button onclick="incrementCounter()">&gt;</button>
             `;
@@ -140,9 +144,7 @@
             const parsedData = JSON.parse(cachedData);
             console.log(parsedData);
 
-            // Assuming 'data-display' is a div, you might want to display specific elements
             updateDisplay();
-
         }else{
             // Fetch data if not cached
             fetchData();

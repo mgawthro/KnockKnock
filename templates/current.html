@@ -127,7 +127,7 @@
     <div class="hiddenmap" id="map"></div>
     
 
-    <form id="currentPosting" action="{{ url_for('form_submission') }}" method="post">
+    <form id="currentPosting" action="{{ url_for('form_submission') }}" method="POST">
         <h2>General Questions</h2>
         
         <label for="status">Do you plan to resign your current lease?</label><br>
@@ -139,13 +139,13 @@
         <label for="undecided">Undecided</label><br><br>
         
         <label for="addy">What's the address of your current lease?</label>
-        <input type="text" id="addy" placeholder="Type an address">
+        <input type="text" id="addy" placeholder="Type an address" name = "address">
         <ul id="autocomplete-list"></ul>
 
         <p>What was your overall experience here?</p>
         <label for="overall-slider"></label>
         <span style="font-size: 30px;">&#128169;</span> 
-        <input style="width: 65%; background:grey;" type="range" id="slider" name="slider" min="0" max="100" step="1" value="50">
+        <input style="width: 65%; background:grey;" type="range" id="slider" name="slider1" min="0" max="100" step="1" value="50">
         <span style="font-size: 30px;">&#x1f525;</span>
         <br><br>
 
@@ -154,7 +154,7 @@
         <p>Neighborhood vibes?</p>
         <label for="party-slider"></label>
         <span style="font-size: 30px;">	&#x1f475;</span> 
-        <input style="width: 65%; background:grey;" type="range" id="slider" name="slider" min="0" max="100" step="1" value="50">
+        <input style="width: 65%; background:grey;" type="range" id="slider" name="slider2" min="0" max="100" step="1" value="50">
         <span style="font-size: 30px;">	&#127881;</span>
         <br><br>
 
@@ -163,9 +163,9 @@
 
         <!-- Submit Button -->
         <br>
-        <a href="{{ url_for('potential') }}">
-            <button type="button" class="transition-button">Submit</button>
-        </a>
+        <!-- <a href="{{ url_for('potential') }}"> -->
+            <button class="button">Submit</button>
+        <!-- </a> -->
     </form>
     <script>
         //array?

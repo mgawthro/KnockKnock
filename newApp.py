@@ -36,17 +36,19 @@ app = Flask(__name__)
 # decoded_token = auth.verify_id_token(id_token)
 # uid = decoded_token['uid']
 
-# # Load Firebase Admin SDK with service account certificate
-# cert = credentials.Certificate("privKey.json")
-# firebase_admin.initialize_app(cert)
-# ref = db.reference('/')
+# Load Firebase Admin SDK with service account certificate
+cred = credentials.Certificate("privKey.json", )
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://knockknock-b4d72-default-rtdb.firebaseio.com/'
+})
+ref = db.reference()
 
-# try:
-#     data = ref.get()
-#     print("Successfully read data from the database:")
-#     print(data)
-# except Exception as e:
-#     print(f"Error reading data from the database: {e}")
+try:
+    data = ref.get()
+    print("Successfully read data from the database:")
+    print(data)
+except Exception as e:
+    print(f"Error reading data from the database: {e}")
 
 # # Set the expiration time to 60 minutes from now
 # expiration_time = datetime.utcnow() + timedelta(minutes=60)
@@ -121,13 +123,18 @@ def form_submission():
     print(form_data_dict)
 
     # Save the JSON data to a file
-    # ref = db.reference('users/' + form_data_dict["address"])
-    # user_data = {
-    #     'resignStatus': form_data_dict["resign"],
-    #     'rating': form_data_dict["slider1"],
-    #     'noise': form_data_dict["slider2"]
-    # }
-    # ref.set(user_data)
+    ref = db.reference('users/' + form_data_dict["address"])
+    user_data = {
+        'resignStatus': form_data_dict["resign"],
+        'rating': form_data_dict["slider1"],
+        'noise': form_data_dict["slider2"]
+    }
+    try:
+        ref.set(user_data)
+        print("Successfully saved user data to the database.")
+    except Exception as e:
+        print(f"Error saving user data to the database: {e}")
+
     if answer_value == 'YES':
         f = open('output.json')
         # returns JSON object as
