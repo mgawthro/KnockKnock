@@ -85,10 +85,10 @@ def process_button():
     # You can do something with the result, e.g., pass it to the template
     return listings
 
-@app.route('/potential/checkHouse/<input>', methods = ["POST"])
+@app.route('/app.py/potential/checkHouse/<path:input>', methods = ["POST"])
 def checkDaHouse():
     try:
-        data = request.form.get('data')
+        data = request.form.get('input')
         
         # Initialize Firebase Admin SDK
         cred = credentials.Certificate("privKey.json")
